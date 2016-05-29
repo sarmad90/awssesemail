@@ -4,7 +4,7 @@ class MyMailer < ActionMailer::Base
     @name = options[:name]
     @email = options[:email]
     @message = options[:message]
-    mail(:to=>"sam_sarmad@hotmail.com", :subject=>"Amazon SES Email", :from=>"info@sarmadsabih.com")
+    mail(:to=>"sarmadserioussam@gmail.com", :subject=>"Amazon SES Email", :from=>"sam_sarmad@hotmail.com")
   end
   
 end

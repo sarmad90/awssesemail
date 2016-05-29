@@ -14,7 +14,9 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -38,13 +40,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'sarmadsabih.com',
-    :enable_starttls_auto => true
+  config.action_mailer.smtp_settings = {
+      :address => "email-smtp.us-east-1.amazonaws.com",
+      :port => 587, # Port 25 is throttled on AWS
+      :user_name => ENV["SES_SMTP_USERNAME"], # Your SMTP user here.
+      :password => ENV["SES_SMTP_PASSWORD"], # Your SMTP password here.
+      :authentication => :login,
+      :enable_starttls_auto => true
   }
 end
